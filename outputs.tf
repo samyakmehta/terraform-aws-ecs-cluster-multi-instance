@@ -2,6 +2,10 @@ output "id" {
   value = "${aws_ecs_cluster.container_instance.id}"
 }
 
+output "arn" {
+  value = "${aws_ecs_cluster.container_instance.arn}"
+}
+
 output "name" {
   value = "${aws_ecs_cluster.container_instance.name}"
 }
