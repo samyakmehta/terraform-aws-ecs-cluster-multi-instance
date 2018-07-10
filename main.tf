@@ -79,6 +79,14 @@ data "aws_iam_policy_document" "ecs_autoscale_assume_role" {
 resource "aws_security_group" "container_instance" {
   vpc_id = "${var.vpc_id}"
 
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [
+      "0.0.0.0/0"]
+  }
+
   tags {
     Name        = "sgContainerInstance"
     Project     = "${var.project}"
