@@ -2,7 +2,7 @@
 
 A Terraform module to create an Amazon Web Services (AWS) EC2 Container Service (ECS) cluster. This module is an offshoot from [this module](azavea/terraform-aws-ecs-cluster) where extra feature of enabling multiple types of instances in a cluster is enabled. This will allow the task to have more granular placement constraints.
 
-####NOTE
+#### NOTE
 
 Please make sure you have the exact same size lists as that of the `instance_types`. If it's smaller that the `instance_types` list, you'll face errors. 
 
