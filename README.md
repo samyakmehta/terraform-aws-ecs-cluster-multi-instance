@@ -1,6 +1,10 @@
 # terraform-aws-ecs-cluster
 
-A Terraform module to create an Amazon Web Services (AWS) EC2 Container Service (ECS) cluster.
+A Terraform module to create an Amazon Web Services (AWS) EC2 Container Service (ECS) cluster. This module is an offshoot from [this module](azavea/terraform-aws-ecs-cluster) where extra feature of enabling multiple types of instances in a cluster is enabled. This will allow the task to have more granular placement constraints.
+
+####NOTE
+
+Please make sure you have the exact same size lists as that of the `instance_types`. If it's smaller that the `instance_types` list, you'll face errors. 
 
 ## Usage
 
@@ -18,17 +22,17 @@ module "container_service_cluster" {
 
   vpc_id        = "vpc-20f74844"
   ami_id        = "ami-b2df2ca4"
-  instance_type = "t2.micro"
+  instance_type = ["t2.micro", "m4.large"]
   key_name      = "hector"
   cloud_config_content  = "${data.template_file.container_instance_cloud_config.rendered}"
 
-  root_block_device_type = "gp2"
-  root_block_device_size = "10"
+  root_block_device_type = ["gp2", "standard"]
+  root_block_device_size = ["10", "50"]
 
   health_check_grace_period = "600"
-  desired_capacity          = "1"
-  min_size                  = "0"
-  max_size                  = "1"
+  desired_capacity          = ["1", "2"]
+  min_size                  = ["0", "0"]
+  max_size                  = ["3", "4"]
 
   enabled_metrics = [
     "GroupMinSize",
@@ -56,7 +60,7 @@ module "container_service_cluster" {
 - `ami_owners` - List of accounts that own the AMI (default: `self, amazon, aws-marketplace`)
 - `root_block_device_type` - Instance root block device type (default: `gp2`)
 - `root_block_device_size` - Instance root block device size in gigabytes (default: `8`)
-- `instance_type` - Instance type for cluster instances (default: `t2.micro`)
+- `instance_types` - Instance types for cluster instances (default: `[t2.micro]`)
 - `key_name` - EC2 Key pair name
 - `cloud_config_content` - user data supplied to launch configuration for cluster nodes
 - `cloud_config_content_type` - the type of configuration being passed in as user data, see [EC2 user guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonLinuxAMIBasics.html#CloudInit) for a list of possible types (default: `text/cloud-config`)
@@ -66,20 +70,20 @@ module "container_service_cluster" {
 - `max_size` - Maximum number of EC2 instances in cluster (default: `1`)
 - `enabled_metrics` - A list of metrics to gather for the cluster
 - `private_subnet_ids` - A list of private subnet IDs to launch cluster instances
-- `scale_up_cooldown_seconds` - Number of seconds before allowing another scale up activity (default: `300`)
-- `scale_down_cooldown_seconds` - Number of seconds before allowing another scale down activity (default: `300`)
-- `high_cpu_evaluation_periods` - Number of evaluation periods for high CPU alarm (default: `2`)
-- `high_cpu_period_seconds` - Number of seconds in an evaluation period for high CPU alarm (default: `300`)
-- `high_cpu_threshold_percent` - Threshold as a percentage for high CPU alarm (default: `90`)
-- `low_cpu_evaluation_periods` - Number of evaluation periods for low CPU alarm (default: `2`)
-- `low_cpu_period_seconds` - Number of seconds in an evaluation period for low CPU alarm (default: `300`)
-- `low_cpu_threshold_percent` - Threshold as a percentage for low CPU alarm (default: `10`)
-- `high_memory_evaluation_periods` - Number of evaluation periods for high memory alarm (default: `2`)
-- `high_memory_period_seconds` - Number of seconds in an evaluation period for high memory alarm (default: `300`)
-- `high_memory_threshold_percent` - Threshold as a percentage for high memory alarm (default: `90`)
-- `low_memory_evaluation_periods` - Number of evaluation periods for low memory alarm (default: `2`)
-- `low_memory_period_seconds` - Number of seconds in an evaluation period for low memory alarm (default: `300`)
-- `low_memory_threshold_percent` - Threshold as a percentage for low memory alarm (default: `10`)
+- `scale_up_cooldown_seconds` - List for Number of seconds before allowing another scale up activity (default: `[300]`)
+- `scale_down_cooldown_seconds` - List for Number of seconds before allowing another scale down activity (default: `[300]`)
+- `high_cpu_evaluation_periods` - List for Number of evaluation periods for high CPU alarm (default: `[2]`)
+- `high_cpu_period_seconds` - List for Number of seconds in an evaluation period for high CPU alarm (default: `[300]`)
+- `high_cpu_threshold_percent` - Threshold as a percentage for high CPU alarm (default: `[90]`)
+- `low_cpu_evaluation_periods` - List for Number of evaluation periods for low CPU alarm (default: `[2]`)
+- `low_cpu_period_seconds` - List for Number of seconds in an evaluation period for low CPU alarm (default: `[300]`)
+- `low_cpu_threshold_percent` - List for Threshold as a percentage for low CPU alarm (default: `[10]`)
+- `high_memory_evaluation_periods` - List for Number of evaluation periods for high memory alarm (default: `[2]`)
+- `high_memory_period_seconds` -List for Number of seconds in an evaluation period for high memory alarm (default: `[300]`)
+- `high_memory_threshold_percent` - List for Threshold as a percentage for high memory alarm (default: `[90]`)
+- `low_memory_evaluation_periods` - List for Number of evaluation periods for low memory alarm (default: `[2]`)
+- `low_memory_period_seconds` - List for Number of seconds in an evaluation period for low memory alarm (default: `[300]`)
+- `low_memory_threshold_percent` - List for Threshold as a percentage for low memory alarm (default: `[10]`)
 - `project` - Name of project this cluster is for (default: `Unknown`)
 - `environment` - Name of environment this cluster is targeting (default: `Unknown`)
 

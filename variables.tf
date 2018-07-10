@@ -1,3 +1,6 @@
+variable "region" {
+}
+
 variable "project" {
   default = "Unknown"
 }
@@ -13,6 +16,7 @@ variable "ami_id" {
 }
 
 variable "ami_owners" {
+  type = "list"
   default = ["self", "amazon", "aws-marketplace"]
 }
 
@@ -21,15 +25,33 @@ variable "lookup_latest_ami" {
 }
 
 variable "root_block_device_type" {
-  default = "gp2"
+  type = "list"
+  default = ["gp2"]
 }
 
 variable "root_block_device_size" {
-  default = "8"
+  type = "list"
+  default = ["8"]
 }
 
-variable "instance_type" {
-  default = "t2.micro"
+variable "instance_types" {
+  type = "list"
+  default = ["t2.micro"]
+}
+
+variable "desired_capacity" {
+  type = "list"
+  default = ["1"]
+}
+
+variable "min_size" {
+  type = "list"
+  default = ["1"]
+}
+
+variable "max_size" {
+  type = "list"
+  default = ["1"]
 }
 
 variable "key_name" {}
@@ -44,17 +66,7 @@ variable "health_check_grace_period" {
   default = "600"
 }
 
-variable "desired_capacity" {
-  default = "1"
-}
 
-variable "min_size" {
-  default = "1"
-}
-
-variable "max_size" {
-  default = "1"
-}
 
 variable "enabled_metrics" {
   default = [
@@ -76,57 +88,71 @@ variable "private_subnet_ids" {
 }
 
 variable "scale_up_cooldown_seconds" {
-  default = "300"
+  type = "list"
+  default = ["300"]
 }
 
 variable "scale_down_cooldown_seconds" {
-  default = "300"
+  type = "list"
+  default = ["300"]
 }
 
 variable "high_cpu_evaluation_periods" {
-  default = "2"
+  type = "list"
+  default = ["2"]
 }
 
 variable "high_cpu_period_seconds" {
-  default = "300"
+  type = "list"
+  default = ["300"]
 }
 
 variable "high_cpu_threshold_percent" {
-  default = "90"
+  type = "list"
+  default = ["90"]
 }
 
 variable "low_cpu_evaluation_periods" {
-  default = "2"
+  type = "list"
+  default = ["2"]
 }
 
 variable "low_cpu_period_seconds" {
-  default = "300"
+  type = "list"
+  default = ["300"]
 }
 
 variable "low_cpu_threshold_percent" {
-  default = "10"
+  type = "list"
+  default = ["10"]
 }
 
 variable "high_memory_evaluation_periods" {
-  default = "2"
+  type = "list"
+  default = ["2"]
 }
 
 variable "high_memory_period_seconds" {
-  default = "300"
+  type = "list"
+  default = ["300"]
 }
 
 variable "high_memory_threshold_percent" {
-  default = "90"
+  type = "list"
+  default = ["90"]
 }
 
 variable "low_memory_evaluation_periods" {
-  default = "2"
+  type = "list"
+  default = ["2"]
 }
 
 variable "low_memory_period_seconds" {
-  default = "300"
+  type = "list"
+  default = ["300"]
 }
 
 variable "low_memory_threshold_percent" {
-  default = "10"
+  type = "list"
+  default = ["10"]
 }

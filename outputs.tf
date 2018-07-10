@@ -19,7 +19,7 @@ output "ecs_service_role_name" {
 }
 
 output "container_instance_autoscaling_group_name" {
-  value = "${aws_autoscaling_group.container_instance.name}"
+  value = "${aws_autoscaling_group.container_instance.*.name}"
 }
 
 output "ecs_service_role_arn" {
