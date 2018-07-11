@@ -4,7 +4,7 @@ A Terraform module to create an Amazon Web Services (AWS) EC2 Container Service 
 
 #### NOTE
 
-Please make sure you have the exact same size lists as that of the `instance_types`. If it's smaller that the `instance_types` list, you'll face errors. 
+Please make sure you have the exact same size lists as that of the `instance_types`. If it's smaller than the `instance_types` list, you'll face errors. 
 
 ## Usage
 
@@ -86,6 +86,7 @@ module "container_service_cluster" {
 - `low_memory_threshold_percent` - List for Threshold as a percentage for low memory alarm (default: `[10]`)
 - `project` - Name of project this cluster is for (default: `Unknown`)
 - `environment` - Name of environment this cluster is targeting (default: `Unknown`)
+- `spot_enabled` - Enabling [AutoSpotting](https://github.com/cristim/autospotting) tag. It's the default tag used by AutoSpotting (default: `true`)
 
 ## Outputs
 

@@ -156,3 +156,8 @@ variable "low_memory_threshold_percent" {
   type = "list"
   default = ["10"]
 }
+
+
+variable "spot_enabled" {
+  default = "false"
+}

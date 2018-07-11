@@ -81,7 +81,7 @@ resource "aws_security_group" "container_instance" {
 
   egress {
     from_port = 0
-    to_port = 65535
+    to_port = 0
     protocol = "-1"
     cidr_blocks = [
       "0.0.0.0/0"]
@@ -212,6 +212,12 @@ resource "aws_autoscaling_group" "container_instance" {
   tag {
     key                 = "Environment"
     value               = "${var.environment}"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "spot-enabled"
+    value               = "${var.spot_enabled}"
     propagate_at_launch = true
   }
 }
