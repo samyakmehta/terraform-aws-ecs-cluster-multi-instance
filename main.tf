@@ -142,7 +142,7 @@ data "aws_ami" "ecs_ami" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
-  owners      = [var.ami_owners]
+  owners      = var.ami_owners
 }
 
 data "aws_ami" "user_ami" {
